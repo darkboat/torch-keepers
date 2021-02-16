@@ -9,24 +9,29 @@ import config from "./utils/terrain/config";
 const canvas = document.querySelector("canvas"); // get the canvas reference
 const ctx = canvas.getContext("2d"); // get the context of the cavas to draw on it
 
-function fullscreen() {
-  if (canvas.webkitRequestFullScreen) {
-    el.webkitRequestFullScreen();
-  } else {
-    el.mozRequestFullScreen();
-  }
-}
-canvas.addEventListener("click", fullscreen);
+// Setting state to update the game
+let state = {
+  character: {
+    posX: config.SOC * 4.3333,
+    posY: config.GL - config.HOB * 2,
+  },
+  blocks: [],
+};
 
-genTerrain(canvas, ctx);
+// Character Initiation
 let char = new Character();
-char.spawn(ctx, config.SOC * 4.3333, config.GL - config.HOB * 2);
 
-document.addEventListener("keydown", (e) => {
-  let key = e.key;
-  if (key == "a") {
-    char.moveLeft();
-  } else if (key == "d") {
-    char.moveRight();
-  }
-});
+function draw() {
+  ctx.clearRect();
+  char.spawn(ctx, state.character.posX, state.character.posY);
+  state.blocks = genTerrain(canvas, ctx);
+}
+
+function update(progress) {}
+
+function loop() {
+  update();
+  draw();
+}
+
+window.requestAnimationFrame(loop);

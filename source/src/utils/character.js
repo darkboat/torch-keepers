@@ -13,16 +13,10 @@ class Character {
     this.ctx = ctx;
   }
   moveLeft() {
-    for (var i = 0; i < 10; i++) {
-      movement.moveLeft(this.ctx, this);
-      await delay(100)
-    }
+    movement.moveLeft(this.ctx, this);
   }
   moveRight() {
-    for (var i = 0; i < 10; i++) {
-      movement.moveRight(this.ctx, this);
-      await delay(100)
-    }
+    movement.moveRight(this.ctx, this);
   }
   jump() {
     movement.jump(this.ctx, this);
