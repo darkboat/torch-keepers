@@ -1,11 +1,32 @@
-function spawn() {
-  const aspectRatio = 1920 / 1080; // Set aspect ration to 16:9
-  const imgSize = 360; // set the size of the default character image
+import movement from "./movement/movement";
+import delay from "./core/delay";
 
-  let img = new Image(imgSize * aspectRatio, imgSize); // create the image element
-  img.src = "../../../../assets/pixel-art/character/default.png"; // set the image on the element to the Default Character image
+class Character {
+  spawn(ctx, posX, posY) {
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.fillRect(posX, posY, 50, 50);
+    ctx.stroke();
 
-  document.body.appendChild(img); // Put Default Character on screen
+    this.posX = posX;
+    this.posY = posY;
+    this.ctx = ctx;
+  }
+  moveLeft() {
+    for (var i = 0; i < 10; i++) {
+      movement.moveLeft(this.ctx, this);
+      await delay(100)
+    }
+  }
+  moveRight() {
+    for (var i = 0; i < 10; i++) {
+      movement.moveRight(this.ctx, this);
+      await delay(100)
+    }
+  }
+  jump() {
+    movement.jump(this.ctx, this);
+  }
 }
 
-export default spawn;
+export default Character;
