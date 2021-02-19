@@ -1,3 +1,3 @@
 export default {
-  speed: 1,
+  speed: 5,
 };
